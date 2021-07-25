@@ -1,0 +1,85 @@
+<%- include('headers/header.ejs') %>
+
+<style>
+	.container {
+		-webkit-box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 1);
+		-moz-box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 1);
+		box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 1);
+		padding: 50px;
+		border-radius: 10px;
+	}
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a style="font-size: x-large;" class="navbar-brand ml-5" href="#">SIGN UP HERE</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="btn btn-secondary mr-2" href="/patient">Patient <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class=" btn btn-secondary ml-2" href="/hospital">Hospital</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<div class="container mt-5">
+	<% if(flag=='1'){ %>
+		<div class="alert alert-danger alert-dismissible fade show">
+			<strong>Error! </strong><%= message%>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		<% }%>
+	<form action="/patient/register" method="POST">
+		<input
+			class="form-control mt-2 mb-2"
+			type="username"
+			name="username"
+			placeholder="username" required
+		/>
+		<input
+			class="form-control mt-2 mb-2"
+			type="password"
+			name="password"
+			placeholder="password"required
+		/>
+		<input
+			class="form-control mt-2 mb-2"
+			type="text"
+			name="name"
+			placeholder="name"required
+		/>
+		<input
+			class="form-control mt-2 mb-2"
+			type="number"
+			name="contact"
+			placeholder="contact"required
+		/>
+		<input
+			class="form-control mt-2 mb-2"
+			type="number"
+			name="age"
+			placeholder="age"required
+		/>
+		<input
+			class="form-control mt-2 mb-2"
+			type="text"
+			name="gender"
+			placeholder="Sex"required
+		/>
+
+		<button
+			style="display: block; margin: auto;"
+			class="btn btn-primary"
+			type="submit"
+		>
+			Register
+		</button>
+	</form>
+</div>
+
+<%- include('headers/footer.ejs') %>

@@ -1,0 +1,84 @@
+<%- include('headers/header.ejs') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a style="font-size: x-large;" class="navbar-brand ml-5" href="#">CHOOSE YOUR LOCATION</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="btn btn-secondary mr-2" href="/patient">Patient <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class=" btn btn-secondary ml-2" href="/hospital">Hospital</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<style>
+	.location {
+		background-image: url('https://www.geekletters.com/wp-content/uploads/2016/01/locationfeature.png');
+		background-size: 100%;
+		background-repeat: no-repeat;
+		text-align: center;
+		margin-top: 10%;
+	}
+</style>
+<div class="location container form-group mt-5 ">
+	
+	<form style="padding: 10%;" action="/patient/getlocation" method="POST">
+		<% if(flag=='1'){ %>
+			<div class="alert alert-danger alert-dismissible fade show">
+				<strong>Error! </strong><%= message%>
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			</div>
+			<%}%>
+
+		<input style="width: 50%;" class="form-control mb-2 mr-auto ml-auto" type="text" id="city" name="city"
+			placeholder="city" required/>
+		<input style="width: 50%;" class="form-control mr-auto ml-auto" type="text" id="state" name="state"
+			placeholder="state"  required/>
+		<button class="btn btn-primary btn-lg mt-3" type="submit">
+			Submit
+		</button>
+	</form>
+
+	<button class="btn btn-danger btn-lg" onclick="getLocation()">
+		GET MY location
+	</button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else {
+			//x.innerHTML = "Geolocation is not supported by this browser.";
+		}
+	}
+
+	async function showPosition(position) {
+		var lat = position.coords.latitude;
+		var long = position.coords.longitude;
+	//	console.log(lat, long);
+		var url =
+			"https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?apiKey=Ns-i1X_ujmhcAETGkLMFOzO83Y2YmtcFt4NX4C843E8&mode=retrieveAddresses&prox=" +
+			lat +
+			"," +
+			long +
+			",25";
+		//console.log(url);
+		const data = await fetch(url);
+		const res = await data.json();
+		//console.log(res)
+		const data1 = res.Response.View[0].Result[0].Location.Address;
+		document.getElementById("city").value = data1.AdditionalData[2].value;
+		document.getElementById("state").value = data1.AdditionalData[1].value;
+	}
+</script>
+<%- include('headers/footer.ejs') %>

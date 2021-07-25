@@ -1,0 +1,84 @@
+<%- include('headers/header.ejs') %>
+<!-- <form action="/patient" method="POST">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        
+        <button>
+            SUBMIT
+        </button>
+
+    </form>
+    <a href="/patient/register" >REGISTER</a> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a style="font-size: x-large;" class="navbar-brand ml-5" href="#">LOGIN</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="btn btn-secondary mr-2" href="/patient">Patient <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class=" btn btn-secondary ml-2" href="/hospital">Hospital</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<style>
+	body {
+		background-image: url("https://thumbs.dreamstime.com/b/hospital-staff-group-eight-men-women-doctors-nurses-characters-standing-together-medical-people-flat-style-vector-91985095.jpg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		
+	}
+
+	.form-container {
+		background: #fff;
+		padding: 30px;
+		border-radius: 10px;
+		box-shadow: 6px 6px 10px 0px rgb(33, 21, 54);
+		margin: auto;
+	}
+
+	.res {
+		width: 50%;
+		height: 35%;
+		margin: 25px auto;
+	}
+
+	@media only screen and (max-width: 768px) {
+		.res {
+			width: 100%;
+		}
+	}
+</style>
+
+<div class="container-fluid ">
+	<!-- <h1 style="text-align: center; color: #6A33D3; margin: 0; padding: 0;">Login</h1> -->
+	<div style="margin-top: 10%;">
+		<div class="form-container res">
+			<% if(flag=='1'){ %>
+			<div class="alert alert-danger alert-dismissible fade show">
+				<strong>Error!</strong><%= message%>
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			</div>
+			<% }  %>
+			<form action="/patient" method="POST">
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="Username" name="username" />
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="password" placeholder="Password" name="password" />
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success btn-lg" type="submit">Login</button>
+				</div>
+			</form>
+			<a href="/patient/register" style="margin-left:37%" class="btn btn-dark btn-lg" type="submit">REGISTER</a>
+		</div>
+	</div>
+</div>
+<%- include('headers/footer.ejs') %>

@@ -1,0 +1,83 @@
+<%- include('headers/header.ejs') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a style="font-size: x-large;" class="navbar-brand ml-5" href="#"
+		>REGISTER AS HOSPITAL</a
+	>
+	<button
+		class="navbar-toggler"
+		type="button"
+		data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent"
+		aria-expanded="false"
+		aria-label="Toggle navigation"
+	>
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="btn btn-secondary mr-2" href="/patient"
+					>Patient <span class="sr-only">(current)</span></a
+				>
+			</li>
+			<li class="nav-item">
+				<a class=" btn btn-secondary ml-2" href="/hospital">Hospital</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<style>
+	.container {
+		-webkit-box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 1);
+		-moz-box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 1);
+		box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 1);
+		padding: 50px;
+		border-radius: 10px;
+	}
+</style>
+
+<div class="container mt-5">
+	<% if(flag=='1'){ %>
+		<div class="alert alert-danger alert-dismissible fade show">
+			<strong>Error!</strong><%= message%>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		<% } else if(flag==2){ %>
+			<div class="alert alert-success alert-dismissible fade show">
+				<strong>Congrats! </strong><%= message%>
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			</div>
+			<%} %>
+	<form action="/hospital" enctype="multipart/form-data" method="POST">
+		<input
+			class="form-control mt-2 mb-2"
+			type="text"
+			name="name"
+			placeholder="hosptial name"
+		/>
+		<input
+			class="form-control mt-2 mb-2"
+			type="city"
+			name="city"
+			placeholder="city"
+		/>
+		<input
+			class="form-control mt-2 mb-2"
+			type="state"
+			name="state"
+			placeholder="state"
+		/>
+		<textarea
+			class="form-control mt-2 mb-2"
+			name="specs"
+			placeholder="Enter hospital details"
+			rows="1"
+		></textarea>
+		<input type="file" name="image" placeholder="image" accept="image/*" />
+		<button style="float: right;" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<%- include('headers/footer.ejs') %>

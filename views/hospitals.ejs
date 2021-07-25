@@ -1,0 +1,56 @@
+<%- include('headers/header.ejs') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a style="font-size: x-large;" class="navbar-brand ml-5" href="#">CHOOSE HOSPITAL</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="btn btn-secondary mr-2" href="/patient">Patient <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class=" btn btn-secondary ml-2" href="/hospital">Hospital</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+<% if(docs.length==0){ %>
+
+<div class="alert alert-warning alert-dismissible fade show text-center">
+	<strong> NO HOSPITALS CURRENTLY</strong>
+		
+		<a class=" btn btn-secondary ml-2" href="/hospital"> ADD HOSPITAL</a>
+
+</div>
+
+<% } %>
+
+<% for(var i=0;i<docs.length;i++){ %>
+
+<div class="d-flex justify-content-around">
+
+	<div class="card mb-2 mt-2" style="width: 70%;">
+		<div class="row no-gutters">
+			<div class="col-md-4">
+				<img src="<%= docs[i].Url%>" class="card-img" alt="...">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 style="text-transform: uppercase;" class="card-title"><%= docs[i].name%> HOSPITAL</h5>
+					<!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+					<p><%= docs[i].specs%></p>
+					<p class="card-text"><medium class="text-unmuted"><%= docs[i].city%>, <%= docs[i].state%></small></p>
+				</div>
+				<a href="/patient/getLocation/hospital_detail?id=<%=docs[i]._id%>" style="float: right;margin-right:2%"
+					class="btn btn-primary">GO TO HOSPITAL</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%  } %>
+<%- include('headers/footer.ejs') %>
